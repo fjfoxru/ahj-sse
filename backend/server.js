@@ -62,11 +62,12 @@ const seeObjects = [
   }
 ];
 
+const allMessages = [];
 
 router.get('/sse', async (ctx) => {
-  const allMessages = [];
   streamEvents(ctx.req, ctx.res, {
-    async fetch() {
+    async fetch(lastEventId) {
+      console.log(lastEventId);
       return allMessages;
     },
     stream(sse) {
